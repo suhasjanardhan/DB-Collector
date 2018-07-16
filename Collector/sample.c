@@ -4,7 +4,7 @@
 #include "dbhelper.h"
 #include <sys/time.h>
 
-
+extern const char * getSqliteType(TYPE_ENUM);
 void createTable(tabstruct** t, int col) {
 printf("in create: col: %d\n",col);
 sqlite3 *db;
@@ -32,22 +32,21 @@ char temp[1000000];
 if(i == 1) {
 printf("in first code\n");
 printf("%s\n",t[0]->field);
-printf("%s: %s: %s: %s\n",t[i-1]->field,t[i-1]->field,t[i]->field,t[i]->type);
-sprintf(temp,"DROP TABLE IF EXISTS %s; CREATE TABLE %s(%s %s,",t[i-1]->field,t[i-1]->field,t[i]->field,t[i]->type);
+sprintf(temp,"DROP TABLE IF EXISTS %s; CREATE TABLE %s(%s %s,",t[i-1]->field,t[i-1]->field,t[i]->field, getSqliteType(t[i]->type));
 printf("%s\n",temp);
 }
 
 if( i!=1 && i!=col-1 ) {
-sprintf(temp,"%s %s,",t[i]->field,t[i]->type);
+sprintf(temp,"%s %s,",t[i]->field, getSqliteType(t[i]->type));
 printf("%s\n",temp);
 }
 
 if(i == col-1) {
-sprintf(temp,"%s %s)",t[i]->field,t[i]->type);
+sprintf(temp,"%s %s)",t[i]->field, getSqliteType(t[i]->type));
 printf("%s\n",temp);
 }
 strcat(final,temp);
-printf("%s",final);
+printf("%s\n",final);
 memset(temp, 0, 100000);
 }
 

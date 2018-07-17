@@ -6,22 +6,24 @@
 //extern int useSqlite();
 //extern int useMongo();
 #define MAX_TYPES 1000
-#define enum_type(x, y) x,
-#define sqlite_type(x, y) y,
+#define enum_type(x, y, z) x,
+#define sqlite_type(x, y, z) y,
+#define mongo_type(x, y, z) z
+#define concat(x,y) x##y
 #define str(x) #x
 
-#define NEW_TYPE(enum_or_db) \
-	enum_or_db(UINT8_T, "TINYINT") \
-	enum_or_db(UINT16_T, "SMALLINT") \
-	enum_or_db(INT, "INT") \
-	enum_or_db(UNSINGED_INT, "UNSIGNED BIG INT") \
-	enum_or_db(STRING, "TEXT")\
-	enum_or_db(CHAR, "TEXT") \
-	enum_or_db(UNSIGNED_CHAR, "TEXT")\
-	enum_or_db(DOUBLE, "REAL") \
-	enum_or_db(BOOLEAN, "INT2") \
-	enum_or_db(FLOAT, "REAL")\
-	enum_or_db(TIMESTAMP, "NUMERIC")\
+#define NEW_TYPE(enum_sqlite_mongo) \
+	enum_sqlite_mongo(UINT8_T, "TINYINT", "INT32") \
+	enum_sqlite_mongo(UINT16_T, "SMALLINT", "INT32") \
+	enum_sqlite_mongo(INT, "INT", "INT32") \
+	enum_sqlite_mongo(UNSINGED_INT, "UNSIGNED BIG INT", "INT32") \
+	enum_sqlite_mongo(STRING, "TEXT", "UTF8")\
+	enum_sqlite_mongo(CHAR, "TEXT", "UTF8") \
+	enum_sqlite_mongo(UNSIGNED_CHAR, "TEXT", "UTF8")\
+	enum_sqlite_mongo(DOUBLE, "REAL", "DOUBLE") \
+	enum_sqlite_mongo(BOOLEAN, "INT2", "BOOL") \
+	enum_sqlite_mongo(FLOAT, "REAL", "DOUBLE")\
+	enum_sqlite_mongo(TIMESTAMP, "NUMERIC", "TIMESTAMP")\
 
 
 enum types \

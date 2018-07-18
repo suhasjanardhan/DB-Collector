@@ -4,11 +4,27 @@
 /*void createTable(tabstruct** t, int col) {
 createTab(t,col);
 }*/
+const char * getSqliteType (CCHECK_DATATYPE_ENUM_T type_t){
+     
+      static const char * SQLITE_TYPES[MAX_TYPES] ={
+	  CCHECK_NEW_DATATYPE(sqlite_type) 
+	};
 
-const char * getSqliteType(TYPE_ENUM type_t){
      if(type_t > UNDEFINED){
-     	fprintf(stderr, "TYPE ERROR: %u is not defined as DB data type \n", type_t);
+     	fprintf(stderr, "TYPE ERROR: %u is not defined as DB data type \n", type_t);	
 	return "UNDEFINED";
      }
-     return SQLITE_TYPE[type_t];
+     return SQLITE_TYPES[type_t];
+}
+
+const char * getMongoType (CCHECK_DATATYPE_ENUM_T type_t) {
+      static const char * MONGO_TYPES[MAX_TYPES] = {  
+	    CCHECK_NEW_DATATYPE(mongo_type) 
+	};
+      
+      if(type_t > UNDEFINED) {
+     	  fprintf(stderr, "TYPE ERROR: %u is not defined as DB data type\n", type_t);
+	  return "UNDEFINED"; 
+      }
+      return MONGO_TYPES[type_t];    
 }

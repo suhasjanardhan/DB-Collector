@@ -6,7 +6,6 @@
 //#include "collector1.h"
 
 
-
 int main() {
 
 

@@ -4,7 +4,8 @@
 #include "dbhelper.h"
 #include <sys/time.h>
 
-extern const char * getSqliteType(TYPE_ENUM);
+
+
 void createTable(tabstruct** t, int col) {
 printf("in create: col: %d\n",col);
 sqlite3 *db;

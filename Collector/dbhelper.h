@@ -2,21 +2,23 @@
 #define DBHELPER_H_
 
 //#include "collector.h"
-
+#include<stdio.h>
 //extern int useSqlite();
 //extern int useMongo();
 #define MAX_TYPES 1000
 #define enum_type(x, y, z) x,
 #define sqlite_type(x, y, z) y,
-#define mongo_type(x, y, z) z
+#define mongo_type(x, y, z) z, 
 #define concat(x,y) x##y
 #define str(x) #x
 
-#define NEW_TYPE(enum_sqlite_mongo) \
+#define CCHECK_NEW_DATATYPE(enum_sqlite_mongo) \
 	enum_sqlite_mongo(UINT8_T, "TINYINT", "INT32") \
 	enum_sqlite_mongo(UINT16_T, "SMALLINT", "INT32") \
 	enum_sqlite_mongo(INT, "INT", "INT32") \
-	enum_sqlite_mongo(UNSINGED_INT, "UNSIGNED BIG INT", "INT32") \
+	enum_sqlite_mongo(INT32, "INT", "INT32") \
+	enum_sqlite_mongo(UNSIGNED_INT, "UNSIGNED BIG INT", "INT32") \
+	enum_sqlite_mongo(UNSIGNED_LONG_INT, "INTEGER", "INT64") \
 	enum_sqlite_mongo(STRING, "TEXT", "UTF8")\
 	enum_sqlite_mongo(CHAR, "TEXT", "UTF8") \
 	enum_sqlite_mongo(UNSIGNED_CHAR, "TEXT", "UTF8")\
@@ -26,22 +28,22 @@
 	enum_sqlite_mongo(TIMESTAMP, "NUMERIC", "TIMESTAMP")\
 
 
-enum types \
+enum cchecker_data_types \
 	{
-	   NEW_TYPE(enum_type) UNDEFINED
+	   CCHECK_NEW_DATATYPE(enum_type) UNDEFINED
 	};
-typedef enum types TYPE_ENUM;
-//extern const char * SQLITE_TYPE[];
+typedef enum cchecker_data_types CCHECK_DATATYPE_ENUM_T;
+//extern const char * SQLITE_TYPES[];
 
-static const char * SQLITE_TYPE[MAX_TYPES] ={
-	  NEW_TYPE(sqlite_type) "UNDEFINED"
-	};
+const char * getSqliteType (CCHECK_DATATYPE_ENUM_T type_t);
+const char * getMongoType (CCHECK_DATATYPE_ENUM_T type_t);
+
 
 
 typedef struct {
-char *field;
-TYPE_ENUM type;
-}tabstruct;
+   char *field;
+   CCHECK_DATATYPE_ENUM_T type;
+} tabstruct;
 
 int getColumnNum();
 int getColumnNum_1();
@@ -49,5 +51,4 @@ extern tabstruct** getStruct_Collector();
 extern tabstruct** getStruct_Collector1();
 extern void createTable(tabstruct** t, int col);
 //extern void createTab(tabstruct** t, int col);
-const char * getSqliteType(TYPE_ENUM);
 #endif

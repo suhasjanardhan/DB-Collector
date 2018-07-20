@@ -3,7 +3,9 @@
 
 #include "dbhelper.h"
 int getColumnNum();
-//void printDetails(tabstruct **t);
+char *getTableName();
+
 extern tabstruct** getStruct_Collector();
+
 #endif 
 

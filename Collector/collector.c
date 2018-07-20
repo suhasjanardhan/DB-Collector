@@ -2,43 +2,70 @@
 #include <stdlib.h>
 #include <stdio.h>
 
+
+#include "dbhelper.h"
+#include <string.h>
+
+
 int getColumnNum() {
-return 4;
+return 2;
+}
+
+char *getTableName() {
+char *tname = "component_a";
+return tname;
 }
 
 tabstruct** getStruct_Collector() {
 
 tabstruct **t;
 
-t = malloc(sizeof(tabstruct*) * 4);
-printf("in collector\n");
-for(int i=0; i<4; i++) {
-printf("in for\n");
+t = malloc(sizeof(tabstruct*) * 2);
+
+for(int i=0; i<2; i++) {
 t[i] = malloc(sizeof(tabstruct));
 }
 
-t[0]->field = "sample_tab";
-t[0]->type = 100;
+strcpy(t[0]->field,"id");
+t[0]->type = INT;
 
-t[1]->field = "id";
-t[1]->type = UINT8_T;
-
-t[2]->field = "name";
-t[2]->type = STRING;
-
-t[3]->field = "price";
-t[3]->type = FLOAT;
+strcpy(t[1]->field,"name");
+t[1]->type = CHAR;
 
 return t;
 }
 
 
+
+void insertDataToTable(tabstruct **t) {
+//for(int i=0;i<1000;i++)
+//{
+int id = 2010;
+char *name = "ccccheck";
+float price = id * 0.376;
+             insertData(
+		        t,
+     			2, 
+			id,
+			name
+			);
+//} 
+}
+
+
+
+/*
 void printDetails(tabstruct **t) {
 printf("in print\n");
 for(int i=0;i<4;i++) {
 printf("in for 1\n");
+<<<<<<< Updated upstream
 printf("field = %s : type = %u\n",t[i]->field,t[i]->type);
+=======
+printf("field = %s : type = %s\n",t[i]->field,getSqliteType(t[i]->type));
+>>>>>>> Stashed changes
 }
+*/
 
-} 
+ 
 

@@ -2,9 +2,23 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include "dbhelper.h"
+#include <string.h>
+/*
+tabstruct** getStructure() {
+return getStruct_Collector1();
+}
 
+int getColumnNumber() {
+return getColumnNum_1();
+}
+*/
 int getColumnNum_1() {
 return 5;
+}
+
+char *getTableName_1() {
+char *tname = "component_b";
+return tname;
 }
 
 tabstruct** getStruct_Collector1() {
@@ -12,29 +26,47 @@ tabstruct** getStruct_Collector1() {
 tabstruct **t;
 
 t = malloc(sizeof(tabstruct*) * 5);
-printf("in collector 2\n");
+//printf("in collector 2\n");
 
 for(int i=0; i<5; i++) {
 t[i] = malloc(sizeof(tabstruct));
 }
-printf("in for 2\n");
-t[0]->field = "sample_tab2";
-t[0]->type = "";
+//printf("in for 2\n");
 
-t[1]->field = "id";
-t[1]->type = "INT";
+strcpy(t[0]->field,"id");
+t[0]->type = INT;
 
-t[2]->field = "name";
-t[2]->type = "TEXT";
+strcpy(t[1]->field,"name");
+t[1]->type = CHAR;
 
-t[3]->field = "price";
-t[3]->type = "REAL";
+strcpy(t[2]->field,"price");
+t[2]->type = FLOAT;
 
-t[4]->field = "count";
-t[4]->type = "INT";
+strcpy(t[3]->field,"count");
+t[3]->type = INT;
 
 return t;
 }
+
+
+void insertDataToTable(tabstruct **t) {
+//for(int i=0;i<1000;i++)
+//{
+int id = 22222;
+char *name = "ccccheck_2";
+float price = id * 0.376;
+int ct = 7;
+             insertData(
+                        t,
+                        4,
+                        id,
+                        name,
+                        price,
+			ct);
+//}
+}
+
+
 
 /*
 void printDetails(tabstruct **t) {

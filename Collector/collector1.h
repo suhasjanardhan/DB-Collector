@@ -4,6 +4,7 @@
 #include "dbhelper.h"
 
 int getColumnNum_1();
+char *getTableNAme_1();
 //void printDetails(tabstruct **t);
 extern tabstruct** getStruct_Collector1();
 #endif 

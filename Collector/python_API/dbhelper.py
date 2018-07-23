@@ -29,7 +29,7 @@ class Tabledata:
            for instance [("name_of_1st_column", CCHECK_DATA_TYPES.INT), ... ] 
         '''
         self.columns = []
-        self.table_data_dictionary = {}
+        self.table_data_dictionary = []
 
     def add_column(self, name, data_type): 
         '''
@@ -47,35 +47,41 @@ class Tabledata:
     def get_table_info(self):
         return {
             Table_Name: self.table_name,
-            Columns: self.columns;
+            Columns: self.columns
         }
     
 
-     def createDataDictionary(self):
-         self.data_dict = list();
+    def create_table_data_dictionaryionary(self):
+         self.table_data_dictionary = list();
      
-     def addDataToColumn(column_name, column_data):
+    def add_data_to_column(column_name, column_data):
          temp_array = [None for col in self.columns]
          if(self.columns.index(column_name) != -1):
              temp_array[self.columns.index(column_name)] = column_data;
-             self.data_dict.append((temp_array))
+             self.table_data_dictionary.append((temp_array))
      
          else:
              raise Exception("No such column exists in the table ")
 
-     def addDataToTable(self, **kwargs):
-         self.data_dict.append(kwargs.values())
+    def add_data_to_table(self, **kwargs):
+         self.table_data_dictionary.append(tuple(kwargs.values()))
     
-     def callCreateTable(self):
+    def call_create_table(self):
          print("calling create table");
          coll_python.CreateTable(self.columns,self.table_name);
    
      
-print(CCHECK_DATA_TYPES.UINT8_T.value[0]);
 sample_table_data = Tabledata("Test_Table")
 sample_table_data.add_column('col1', CCHECK_DATA_TYPES.INT);
 sample_table_data.add_column('col2', CCHECK_DATA_TYPES.STRING);
 print(sample_table_data);
-sample_table_data.callCreateTable();
+sample_table_data.call_create_table();
+sample_table_data.add_data_to_table(col1=1,col2='abc');
+sample_table_data.add_data_to_table(col1=2,col2='sat');
+sample_table_data.add_data_to_table(col1=3,col2='xyz');
+sample_table_data.add_data_to_table(col1=4,col2='poi');
+print(sample_table_data.table_data_dictionary)
+
+
  
                 

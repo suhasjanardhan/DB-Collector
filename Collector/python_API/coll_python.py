@@ -8,10 +8,10 @@ dbTableName = ""
 def CreateTable(columns,tableName):
     dropTab = "DROP TABLE IF EXISTS {};"
     createTab = "CREATE TABLE {}(";
-    for(x,y) in columns[:-1]:
-        createTab += x + " " + y + ","
-    
-    createTab = createTab + columns[-1][0] + " " + columns[-1][1] + ");";
+    query_ext = [x + " " + y for(x,y) in columns]
+    query_ext = ",".join(query_ext) 
+    createTab += query_ext + ");";
+    print(createTab)
     
     dropTab = dropTab.format(tableName);
     createTab = createTab.format(tableName);

@@ -1,7 +1,8 @@
 import sqlite3
+import coll_python
 from enum import Enum
 
-DB_SWITCH = 1 #SQLITE = 1, MONGO = 2
+DB_SWITCH = 0 #SQLITE = 1, MONGO = 2
 
 class CCHECK_DATA_TYPES(Enum):
     UINT8_T = ('TINYINT', 'INT32'); 
@@ -38,12 +39,17 @@ class Tabledata:
         for x in self.columns:
             pretty_print+=x[0]+" "+x[1]+"\n   " 
         return pretty_print
-
+    
+    def callCreateTable(self):
+        print("calling create table");
+        coll_python.CreateTable(self.columns,self.table_name);
    
      
 print(CCHECK_DATA_TYPES.UINT8_T.value[0]);
 sample_table_data = Tabledata("Test_Table")
-sample_table_data.add_column('col1', CCHECK_DATA_TYPES.UINT8_T);
+sample_table_data.add_column('col1', CCHECK_DATA_TYPES.INT);
+sample_table_data.add_column('col2', CCHECK_DATA_TYPES.STRING);
 print(sample_table_data);
+sample_table_data.callCreateTable();
  
                 

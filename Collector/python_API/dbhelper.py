@@ -1,4 +1,5 @@
 import sqlite3
+import coll_python
 from enum import Enum
 
 DB_SWITCH = 0 #SQLITE = 0, MONGO = 1
@@ -64,13 +65,17 @@ class Tabledata:
 
      def addDataToTable(self, **kwargs):
          self.data_dict.append(kwargs.values())
-
     
+     def callCreateTable(self):
+         print("calling create table");
+         coll_python.CreateTable(self.columns,self.table_name);
    
      
 print(CCHECK_DATA_TYPES.UINT8_T.value[0]);
 sample_table_data = Tabledata("Test_Table")
-sample_table_data.add_column('col1', CCHECK_DATA_TYPES.UINT8_T);
+sample_table_data.add_column('col1', CCHECK_DATA_TYPES.INT);
+sample_table_data.add_column('col2', CCHECK_DATA_TYPES.STRING);
 print(sample_table_data);
+sample_table_data.callCreateTable();
  
                 

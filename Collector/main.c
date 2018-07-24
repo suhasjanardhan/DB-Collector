@@ -31,11 +31,11 @@ t = getStruct_Collector1();
 <<<<<<< Updated upstream
 createTable(t,numOfColumn);
 */
-
+printf("calling create table\n");
 createTable(table_name, t, numOfColumn);
 insertDataToTable(t);
-
-
+printf("before calling mongo\n");
+insertDataToTable_Mongo(t, table_name);
 
 }
 

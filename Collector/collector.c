@@ -52,7 +52,12 @@ float price = id * 0.376;
 //} 
 }
 
-
+void insertDataToTable_Mongo(tabstruct **t, char *table_name) {
+printf("insert to mongo\n");
+int id = 2018;
+char *name = "mongoDB";
+int ret = insertData_Mongo(t, table_name,2, id, name);
+}
 
 /*
 void printDetails(tabstruct **t) {

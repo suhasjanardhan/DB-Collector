@@ -18,6 +18,7 @@ char insert_1[1000000];
 char insert_2[1000000];
 
 void createTable(char *table_name, tabstruct** t, int col) {
+printf("inside create table\n");
 strcpy(db_name,table_name);
 strcat(db_name,"_DB.db"); 
 rc = sqlite3_open(db_name, &db);

@@ -1,11 +1,7 @@
 import sqlite3
 
 
-dbTableName = ""
-
-#createTab = "DROP TABLE IF EXISTS {}; CREATE TABLE {}(";
-
-def CreateTable(columns,tableName):
+def createTable(columns,tableName):
     dropTab = "DROP TABLE IF EXISTS {};"
     createTab = "CREATE TABLE {}(";
     query_ext = [x + " " + y for(x,y) in columns]
@@ -25,9 +21,28 @@ def CreateTable(columns,tableName):
     c.execute(dropTab)
     c.execute(createTab)
 
-    # Insert a row of data
-    #c.execute("INSERT INTO stocks VALUES ('2006-01-05','BUY','RHAT',100,35.14)")
-
-    # Save (commit) the changes
     conn.commit() 
+    conn.close()
+
+def insertToTable(data, tableName):
+    conn = sqlite3.connect("{}.db".format(tableName));
+    c = conn.cursor()
+   
+    keyStmt = ",".join([x for x in data]);
+    valStmt = ""
+    for v in data.values():
+        if isinstance(v, str):
+            v = "\'" +v+"\'"
+        else: v = str(v)
+        valStmt += "," + v 
+   
+    
+    insertStmt = "INSERT INTO {0}({1}) values({2});".format(tableName,keyStmt,valStmt[1:]);
+    
+        
+    print(insertStmt);
+           
+    c.execute(insertStmt);
+    
+    conn.commit()
     conn.close()
